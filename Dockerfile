@@ -3,7 +3,7 @@
 FROM debian:bookworm-slim
 WORKDIR /app
 RUN chown 6969:6969 /app
-CMD ["/bin/bash"]
+CMD ["servers/dayz-server/DayZServer -config=serverDZ.cfg -port=2301 -BEpath=battleye -profiles=profiles -dologs -adminlog -netlog -freezecheck"]
 EXPOSE 2301
 
 
@@ -16,5 +16,6 @@ RUN mkdir -p /servers/steamcmd && cd /servers/steamcmd && curl -sqL "https://ste
 
 
 # Download DayZ Server
-RUN /servers/steamcmd/steamcmd.sh +force_install_dir /app/servers/dayz-server/ +login serveradmin43 nqdcxr2XRp53itHVLStV2nPL5rPQe5yJ +app_update 223350 +quit
+RUN /servers/steamcmd/steamcmd.sh +force_install_dir /app/servers/dayz-server/ +set_steam_guard_code V9DWW +login serveradmin43 nqdcxr2XRp53itHVLStV2nPL5rPQe5yJ +app_update 223350 +quit
+COPY serverDZ.cfg /servers/dayz-server/
 
